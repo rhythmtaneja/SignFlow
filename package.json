@@ -1,0 +1,26 @@
+{
+  "name": "signature-app",
+  "version": "1.0.0",
+  "description": "Full-stack PDF signature application",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rhythmtaneja/signature-app.git"
+  },
+  "keywords": [
+    "pdf",
+    "signature",
+    "mern",
+    "react",
+    "nodejs"
+  ],
+  "author": "Rhythm Taneja",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rhythmtaneja/signature-app/issues"
+  },
+  "homepage": "https://github.com/rhythmtaneja/signature-app#readme"
+}
