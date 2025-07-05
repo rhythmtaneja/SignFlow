@@ -133,10 +133,6 @@ signature-app/
 
 Visit the live application: [Sign Flow](https://sign-flow-y9li.vercel.app)
 
-## 📸 Screenshots
-
-*Add screenshots of your application here*
-
 ## 🤝 Contributing
 
 1. Fork the repository
@@ -144,10 +140,6 @@ Visit the live application: [Sign Flow](https://sign-flow-y9li.vercel.app)
 3. Commit your changes (`git commit -m 'Add some amazing feature'`)
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
-
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## 👨‍💻 Author
 
@@ -159,10 +151,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [React PDF Viewer](https://react-pdf-viewer.dev/) for PDF display functionality
 - [PDF-lib](https://pdf-lib.js.org/) for PDF manipulation
 - [Tailwind CSS](https://tailwindcss.com/) for styling
-
-## 📞 Support
-
-If you have any questions or need help, please open an issue on GitHub or contact the author.
 
 ---
 
