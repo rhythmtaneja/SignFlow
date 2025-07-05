@@ -27,8 +27,25 @@ const limiter = rateLimit({
 app.use('/api/', limiter);
 
 // CORS configuration
+const allowedOrigins = [
+  'https://sign-flow-y9li.vercel.app', // production
+  /\.vercel\.app$/ // all Vercel preview domains
+];
+
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'https://sign-flow-y9li.vercel.app/',
+  origin: function (origin, callback) {
+    if (!origin) return callback(null, true); // allow non-browser requests
+    if (
+      allowedOrigins.some(o =>
+        typeof o === 'string'
+          ? o === origin
+          : o instanceof RegExp && o.test(origin)
+      )
+    ) {
+      return callback(null, true);
+    }
+    return callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
 
