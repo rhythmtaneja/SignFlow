@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import DocView from './DocView';
 import { ArrowLeft } from 'lucide-react';
 import { toast } from 'react-toastify';
+import API_BASE_URL from '../api';
 
 const Preview = () => {
   const { id } = useParams();
@@ -14,7 +15,7 @@ const Preview = () => {
     const fetchPdf = async () => {
       const token = localStorage.getItem('token');
       try {
-        const res = await fetch(`http://localhost:5001/api/docs/file/${id}`, {
+        const res = await fetch(`${API_BASE_URL}/api/docs/file/${id}`, {
           headers: { 'x-auth-token': token }
         });
         if (!res.ok) throw new Error('Failed to fetch PDF');
@@ -22,7 +23,7 @@ const Preview = () => {
         setDocUrl(URL.createObjectURL(blob));
         
         // Also fetch document info for the name
-        const docRes = await fetch(`http://localhost:5001/api/docs`, {
+        const docRes = await fetch(`${API_BASE_URL}/api/docs`, {
           headers: { 'x-auth-token': token }
         });
         if (docRes.ok) {

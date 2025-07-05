@@ -4,6 +4,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import SignatureDraggable from '../components/SignatureDraggable';
 import SignatureInput from '../components/SignatureInput';
 import { toast } from 'react-toastify';
+import API_BASE_URL from '../api';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const PublicSign = () => {
@@ -26,7 +27,7 @@ const PublicSign = () => {
   useEffect(() => {
     const fetchDocumentInfo = async () => {
       try {
-        const response = await fetch(`http://localhost:5001/api/signatures/public/${token}`);
+        const response = await fetch(`${API_BASE_URL}/api/signatures/public/${token}`);
         if (!response.ok) {
           throw new Error('Invalid or expired link');
         }
@@ -34,7 +35,7 @@ const PublicSign = () => {
         setDocumentInfo(data);
         
         // Fetch the PDF file
-        const pdfResponse = await fetch(`http://localhost:5001/api/docs/file/${data.documentId}`);
+        const pdfResponse = await fetch(`${API_BASE_URL}/api/docs/file/${data.documentId}`);
         if (!pdfResponse.ok) {
           throw new Error('Failed to fetch PDF');
         }
@@ -72,7 +73,7 @@ const PublicSign = () => {
     if (!signPosition || !currentSignature || !documentInfo) return;
     
     try {
-      const response = await fetch('http://localhost:5001/api/signatures/public', {
+      const response = await fetch(`${API_BASE_URL}/api/signatures/public`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

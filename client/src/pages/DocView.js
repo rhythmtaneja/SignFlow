@@ -4,6 +4,7 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import { Pen, Upload, Type, Download, X, Save } from 'lucide-react';
 import { toast } from 'react-toastify';
 import RejectionModal from '../components/RejectionModal';
+import API_BASE_URL from '../api';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const DocView = ({ docUrl, documentId, showSignButton }) => {
@@ -30,7 +31,7 @@ const DocView = ({ docUrl, documentId, showSignButton }) => {
   const fetchSignatures = useCallback(async () => {
     const token = localStorage.getItem('token');
     try {
-      const res = await fetch(`http://localhost:5001/api/signatures/${documentId}`, {
+      const res = await fetch(`${API_BASE_URL}/api/signatures/${documentId}`, {
         headers: { 'x-auth-token': token }
       });
       const data = await res.json();
@@ -118,8 +119,6 @@ const DocView = ({ docUrl, documentId, showSignButton }) => {
     }
   };
 
-
-
   // Save signature to backend with status
   const handleSaveSignature = async (status = 'signed', rejectionReason = null) => {
     if (!signPosition || !currentSignature) {
@@ -131,7 +130,7 @@ const DocView = ({ docUrl, documentId, showSignButton }) => {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch('http://localhost:5001/api/signatures', {
+      const response = await fetch(`${API_BASE_URL}/api/signatures`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -191,7 +190,7 @@ const DocView = ({ docUrl, documentId, showSignButton }) => {
 
     const token = localStorage.getItem('token');
     try {
-      const response = await fetch(`http://localhost:5001/api/signatures/${signatureId}/status`, {
+      const response = await fetch(`${API_BASE_URL}/api/signatures/${signatureId}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -227,7 +226,7 @@ const DocView = ({ docUrl, documentId, showSignButton }) => {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch('http://localhost:5001/api/signatures', {
+      const response = await fetch(`${API_BASE_URL}/api/signatures`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -280,7 +279,7 @@ const DocView = ({ docUrl, documentId, showSignButton }) => {
     const token = localStorage.getItem('token');
     
     try {
-      const response = await fetch(`http://localhost:5001/api/signatures/generate/${documentId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/signatures/generate/${documentId}`, {
         headers: { 'x-auth-token': token }
       });
       

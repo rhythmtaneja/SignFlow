@@ -28,7 +28,7 @@ app.use('/api/', limiter);
 
 // CORS configuration
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: process.env.CLIENT_URL || 'https://sign-flow-y9li.vercel.app/',
   credentials: true
 }));
 

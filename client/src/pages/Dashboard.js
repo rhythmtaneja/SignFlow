@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FileText, Eye, UploadCloud, Mail, History, CheckCircle, XCircle, Clock, X } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../api';
 
 const Dashboard = () => {
   const [docs, setDocs] = useState([]);
@@ -28,7 +29,7 @@ const Dashboard = () => {
   const fetchDocs = async () => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch('http://localhost:5001/api/docs', {
+      const response = await fetch(`${API_BASE_URL}/api/docs`, {
         headers: {
           'x-auth-token': token
         }
@@ -50,7 +51,7 @@ const Dashboard = () => {
 
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5001/api/docs/${id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/docs/${id}`, {
         method: 'DELETE',
         headers: {
           'x-auth-token': token
@@ -108,7 +109,7 @@ const Dashboard = () => {
     formData.append('document', file);
 
     try {
-      const response = await fetch('http://localhost:5001/api/docs/upload', {
+      const response = await fetch(`${API_BASE_URL}/api/docs/upload`, {
         method: 'POST',
         headers: {
           'x-auth-token': localStorage.getItem('token')
@@ -150,7 +151,7 @@ const Dashboard = () => {
 
     setSendingInvite(true);
     try {
-      const response = await fetch('http://localhost:5001/api/signatures/invite', {
+      const response = await fetch(`${API_BASE_URL}/api/signatures/invite`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -186,7 +187,7 @@ const Dashboard = () => {
     setLoadingAudit(true);
 
     try {
-      const response = await fetch(`http://localhost:5001/api/audit/${doc._id}`, {
+      const response = await fetch(`${API_BASE_URL}/api/audit/${doc._id}`, {
         headers: {
           'x-auth-token': localStorage.getItem('token')
         }

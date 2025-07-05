@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { FileText, UploadCloud } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import API_BASE_URL from '../api';
 
 const Upload = () => {
   const [file, setFile] = useState(null);
@@ -41,7 +42,7 @@ const Upload = () => {
     const formData = new FormData();
     formData.append('pdf', file);
     try {
-      const res = await fetch('http://localhost:5001/api/docs/upload', {
+      const res = await fetch(`${API_BASE_URL}/api/docs/upload`, {
         method: 'POST',
         headers: {
           'x-auth-token': token

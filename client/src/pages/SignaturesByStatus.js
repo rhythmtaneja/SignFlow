@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { CheckCircle, XCircle, Clock, ArrowLeft, Download, Eye } from 'lucide-react';
 import { toast } from 'react-toastify';
 import { useNavigate, useParams } from 'react-router-dom';
+import API_BASE_URL from '../api';
 
 function parseJwt (token) {
   try {
@@ -31,7 +32,7 @@ const SignaturesByStatus = () => {
     if (!token) return;
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:5001/api/signatures/status/${status}`, {
+      const response = await fetch(`${API_BASE_URL}/api/signatures/status/${status}`, {
         headers: { 'x-auth-token': token }
       });
       if (response.status === 401) {
@@ -58,10 +59,10 @@ const SignaturesByStatus = () => {
       
       if (signatureStatus === 'signed') {
         // Open signed PDF in new tab
-        pdfUrl = `http://localhost:5001/api/signatures/generate/${docId}/view`;
+        pdfUrl = `${API_BASE_URL}/api/signatures/generate/${docId}/view`;
       } else {
         // Open original PDF for pending/rejected
-        pdfUrl = `http://localhost:5001/api/docs/file/${docId}/view`;
+        pdfUrl = `${API_BASE_URL}/api/docs/file/${docId}/view`;
       }
 
       // Add token to URL for authentication
@@ -85,12 +86,12 @@ const SignaturesByStatus = () => {
       
       if (signatureStatus === 'signed') {
         // Download signed PDF
-        response = await fetch(`http://localhost:5001/api/signatures/generate/${docId}`, {
+        response = await fetch(`${API_BASE_URL}/api/signatures/generate/${docId}`, {
           headers: { 'x-auth-token': token }
         });
       } else {
         // Download original PDF for pending/rejected
-        response = await fetch(`http://localhost:5001/api/docs/file/${docId}`, {
+        response = await fetch(`${API_BASE_URL}/api/docs/file/${docId}`, {
           headers: { 'x-auth-token': token }
         });
       }
@@ -128,7 +129,7 @@ const SignaturesByStatus = () => {
   const handleDeleteSignature = async (signatureId) => {
     if (!window.confirm('Are you sure you want to delete this signature? This action cannot be undone.')) return;
     try {
-      const response = await fetch(`http://localhost:5001/api/signatures/${signatureId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/signatures/${signatureId}`, {
         method: 'DELETE',
         headers: { 'x-auth-token': token }
       });

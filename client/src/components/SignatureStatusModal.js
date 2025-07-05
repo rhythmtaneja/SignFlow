@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { CheckCircle, XCircle, Clock, AlertCircle } from 'lucide-react';
 import { toast } from 'react-toastify';
+import API_BASE_URL from '../api';
 
 const SignatureStatusModal = ({ isOpen, onClose, signature, onStatusUpdate }) => {
   const [status, setStatus] = useState(signature?.status || 'pending');
@@ -18,7 +19,7 @@ const SignatureStatusModal = ({ isOpen, onClose, signature, onStatusUpdate }) =>
     setUpdating(true);
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:5001/api/signatures/${signature._id}/status`, {
+      const response = await fetch(`${API_BASE_URL}/api/signatures/${signature._id}/status`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
