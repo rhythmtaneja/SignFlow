@@ -29,12 +29,12 @@ app.use('/api/', limiter);
 // CORS configuration
 const allowedOrigins = [
   'https://sign-flow-y9li.vercel.app', // production
-  /\.vercel\.app$/ // all Vercel preview domains
+  /^https:\/\/sign-flow-y9li-[a-z0-9]+-rhythm-tanejas-projects\.vercel\.app$/ // all Vercel preview domains for your project
 ];
 
 app.use(cors({
   origin: function (origin, callback) {
-    if (!origin) return callback(null, true); // allow non-browser requests
+    if (!origin) return callback(null, true);
     if (
       allowedOrigins.some(o =>
         typeof o === 'string'
