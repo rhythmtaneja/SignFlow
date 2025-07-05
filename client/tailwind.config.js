@@ -1,12 +1,8 @@
-cat > client/tailwind.config.js << 'EOF'
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
-<<<<<<< HEAD
     "./public/index.html"
-=======
->>>>>>> refs/remotes/origin/main
   ],
   theme: {
     extend: {
@@ -22,7 +18,3 @@ module.exports = {
   },
   plugins: [],
 }
-<<<<<<< HEAD
-=======
-EOF
->>>>>>> refs/remotes/origin/main
