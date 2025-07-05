@@ -4,6 +4,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const morgan = require('morgan');
 const rateLimit = require('express-rate-limit');
+const fs = require('fs');
 require('dotenv').config();
 
 
@@ -86,6 +87,10 @@ app.use('/api/docs', docRoutes);
 
 app.use('/uploads', express.static('uploads'));
 
+const uploadsDir = './uploads';
+if (!fs.existsSync(uploadsDir)){
+  fs.mkdirSync(uploadsDir);
+}
 
 // Health check
 app.get('/api/health', (req, res) => {
@@ -118,3 +123,5 @@ app.listen(PORT, () => {
   console.log(`📊 Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`🌐 API Health Check: http://localhost:${PORT}/api/health`);
 });
+
+app.set('trust proxy', 1);

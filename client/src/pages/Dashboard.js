@@ -106,7 +106,7 @@ const Dashboard = () => {
 
     setUploading(true);
     const formData = new FormData();
-    formData.append('document', file);
+    formData.append('pdf', file);
 
     try {
       const response = await fetch(`${API_BASE_URL}/api/docs/upload`, {
