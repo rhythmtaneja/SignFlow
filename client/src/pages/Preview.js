@@ -10,9 +10,11 @@ const Preview = () => {
   const navigate = useNavigate();
   const [docUrl, setDocUrl] = useState(null);
   const [documentName, setDocumentName] = useState('');
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchPdf = async () => {
+      setLoading(true);
       const token = localStorage.getItem('token');
       try {
         const res = await fetch(`${API_BASE_URL}/api/docs/file/${id}`, {
@@ -37,6 +39,8 @@ const Preview = () => {
         console.error('Error fetching PDF:', err);
         toast.error('Failed to load PDF file');
         setDocUrl(null);
+      } finally {
+        setLoading(false);
       }
     };
     fetchPdf();
@@ -47,6 +51,17 @@ const Preview = () => {
     };
     // eslint-disable-next-line
   }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-100">
+        <div className="flex flex-col items-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mb-4"></div>
+          <p className="text-gray-600">Loading document...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gray-100">
